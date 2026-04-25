@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Wellness dashboard</h2>
+<div style="background:white; padding:25px; margin-top:10px; border-radius:10px; box-shadow:0 2px 5px rgba(245, 239, 239, 0.9);">
+  <div class="row" style="display:flex; align-items:center;">
+    <div class="col-sm-9">
+      <h4 style="margin:0;">
+        Welcome back {{ user.username }}! Good news: employees wellness is 12% higher than last month, and the global fitness score is going up.
+      </h4>
+    </div>
+
+  
+    <div class="col-sm-3 text-right">
+      <form method="POST" action="{% url 'send_message' %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger"
+    style="border-radius:10px; padding:10px; background-color:#eb7150;">
+    <i class="bi bi-envelope"></i> Send a message
+  </button>
+</form>
+    </div>
+
+  </div>
+
+
+  <div class="row text-center" style="margin-top:15px;">
+    
+    <div class="col-sm-3">
+      <div class="card-box">
+        <i class="bi bi-people-fill" style="font-size:30px;"></i>
+        <h4>Employees</h4>
+        <strong>15,200</strong>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card-box">
+        <i class="bi bi-upc-scan" style="font-size:30px;"></i>
+        <h4>Scans Taken</h4>
+        <strong>12,160</strong>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card-box">
+        <i class="bi bi-x-circle" style="font-size:30px;"></i>
+        <h4>Not Taken</h4>
+        <strong>2,280</strong>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card-box">
+        <i class="bi bi-person" style="font-size:30px;"></i>
+        <h4>Average Age</h4>
+        <strong>34 years</strong>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row" style="margin-top:10px;">
+
+  <div class="col-sm-6">
+    <div class="card-box text-center">
+      <h4>Wellness Score</h4>
+      <h1>60</h1>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card-box text-center">
+      <h5>BMI Risk</h5>
+      <p>25%</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" style="margin-bottom:10px; margin-top:10px;">
+
+  <div class="col-sm-8">
+    <div class="card-box">
+      <h4>Activity Summary</h4>
+      <p>Steps: 6450</p>
+
+      <p>Active</p>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success" style="width:40%"></div>
+      </div>
+
+      <p>Average</p>
+      <div class="progress">
+        <div class="progress-bar progress-bar-warning" style="width:60%"></div>
+      </div>
+
+      <p>Sedentary</p>
+      <div class="progress">
+        <div class="progress-bar progress-bar-danger" style="width:30%"></div>
+      </div>
+    </div>
+  </div>
+
+  
+<div class="col-sm-4">
+  <div class="card-box text-center">
+    <h4>Stress Risk</h4>
+    <div style="width:150px; margin:auto;">
+  <canvas id="stressChart"></canvas>
+</div>
+    <p>25%</p>
+  </div>
+</div>
+
+</div> 
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  new Chart(document.getElementById("stressChart"), {
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: [25, 75],
+        backgroundColor: ["#f44336", "#eaeaea"],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      cutout: '70%',
+      plugins: {
+        legend: { display: false },
+          tooltip: { enabled: false}
+      }
+    }
+  });
+});
+</script>
+{% endblock %}

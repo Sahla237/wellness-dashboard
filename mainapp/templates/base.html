@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+  html, body {
+  height: 100vh;
+  overflow: hidden;
+}
+  
+    .sidebar {
+      height: 100vh;
+      background: #eceef1;
+      color: white;
+      padding-top: 20px;
+    }
+    .logo {
+      margin-left: 5px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 12px 20px;
+      text-decoration: none;
+      justify-content: space-between; 
+    }
+    .sidebar a:hover {
+      background: #eb7150;
+    }
+    .topbar {
+      background: white;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    .card-box {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <div class="logo">
+  <a href="{% url 'home' %}">
+    <img src="{% static 'images/homelogo.jpg' %}" class="img-responsive" />
+  </a>
+</div>
+<a href="{% url 'home' %}">Home <i class="bi bi-house"></i></a>
+<a href="{% url 'profile' %}">Profile <i class="bi bi-person-fill"></i></a>
+<a href="{% url 'settings' %}">Settings <i class="bi bi-gear-fill"></i></a>
+<a href="{% url 'logout' %}">Logout <i class="bi bi-box-arrow-right"></i></a>
+    </div>
+ <div class="col-sm-9 col-md-10">
+  {% block content %}
+  {% endblock %}
+</div>
+</div>
+</div>
+</body>
+</html>
