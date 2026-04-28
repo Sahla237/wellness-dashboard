@@ -2,7 +2,7 @@ from django import forms
 from .models import User
 
 
-# ✅ REGISTER FORM
+
 class RegisterForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput)
 
@@ -22,7 +22,7 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError("Passwords do not match")
 
 
-# ✅ LOGIN FORM
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
