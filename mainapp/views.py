@@ -90,9 +90,24 @@ def send_message(request):
             subject="Wellness Alert",
             message="This is a message from Wellness Dashboard.",
             from_email="sahlauk237@gmail.com",
-            recipient_list=["fidhavk251@gmail.com"],
+            recipient_list=["sahlauk28@gmail.com"],
             fail_silently=False,
         )
         print(" EMAIL SENT SUCCESSFULLY") 
         messages.success(request, "Message sent successfully!")
-    return redirect('home')
+    return redirect('home') 
+
+def forgot_password(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        new_password = request.POST.get("new_password")
+
+        try:
+            user = User.objects.get(username=username)
+            user.password = new_password  
+            user.save()
+            return redirect('login')
+        except User.DoesNotExist:
+            pass
+
+    return render(request, 'forgot_password.html')

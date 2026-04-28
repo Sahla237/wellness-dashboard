@@ -9,5 +9,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('settings/', views.settings, name='settings'),
     path('send-message/', views.send_message, name='send_message'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
 ]
 
